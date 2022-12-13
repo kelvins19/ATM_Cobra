@@ -1,5 +1,6 @@
 # Kelvin-Salim-
 
+This project is built using Golang v1.19
 ## What is this project about?
 This project is a simple CLI project to demonstrate a simple ATM by using Cobra CLI.
 
