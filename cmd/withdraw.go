@@ -21,20 +21,24 @@ var withdrawCmd = &cobra.Command{
 		user := viper.Get("username")
 		username := fmt.Sprintf("%v", user)
 
-		if user != "" {
-			userData, _ := database.FindUser(username)
-			withdrawBalance, _ := strconv.ParseFloat(args[0], 64)
+		if len(args) == 1 {
+			if user != "" {
+				userData, _ := database.FindUser(username)
+				withdrawBalance, _ := strconv.ParseFloat(args[0], 64)
 
-			if withdrawBalance <= userData.Balance {
-				userData.Balance -= withdrawBalance
+				if withdrawBalance <= userData.Balance {
+					userData.Balance -= withdrawBalance
 
-				database.UpdateUser(userData)
-				fmt.Printf("Your balance is $%v \n", userData.Balance)
+					database.UpdateUser(userData)
+					fmt.Printf("Your balance is $%v \n", userData.Balance)
+				} else {
+					fmt.Printf("You don't have enough funds to do the withdraw.\n")
+				}
 			} else {
-				fmt.Printf("You don't have enough funds to do the withdraw.\n")
+				fmt.Printf("Please login first.\n")
 			}
 		} else {
-			fmt.Printf("Please login first.\n")
+			fmt.Printf("Please pass the withdraw balance \n")
 		}
 	},
 }

@@ -21,20 +21,24 @@ var depositCmd = &cobra.Command{
 		user := viper.Get("username")
 		username := fmt.Sprintf("%v", user)
 
-		if user != "" {
-			userData, _ := database.FindUser(username)
-			depositBalance, _ := strconv.ParseFloat(args[0], 64)
+		if len(args) == 1 {
+			if user != "" {
+				userData, _ := database.FindUser(username)
+				depositBalance, _ := strconv.ParseFloat(args[0], 64)
 
-			if depositBalance > 0 {
-				userData.Balance += depositBalance
+				if depositBalance > 0 {
+					userData.Balance += depositBalance
 
-				database.UpdateUser(userData)
-				fmt.Printf("Your balance is $%v \n", userData.Balance)
+					database.UpdateUser(userData)
+					fmt.Printf("Your balance is $%v \n", userData.Balance)
+				} else {
+					fmt.Printf("Please deposit more than 0\n")
+				}
 			} else {
-				fmt.Printf("Please deposit more than 0\n")
+				fmt.Printf("Please login first.\n")
 			}
 		} else {
-			fmt.Printf("Please login first.\n")
+			fmt.Printf("Please pass the deposit balance \n")
 		}
 	},
 }
