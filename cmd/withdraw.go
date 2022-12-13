@@ -29,12 +29,12 @@ var withdrawCmd = &cobra.Command{
 				userData.Balance -= withdrawBalance
 
 				database.UpdateUser(userData)
-				fmt.Printf("Your balance is %v ", userData.Balance)
+				fmt.Printf("Your balance is $%v \n", userData.Balance)
 			} else {
-				fmt.Printf("You don't have enough funds to do the withdraw.")
+				fmt.Printf("You don't have enough funds to do the withdraw.\n")
 			}
 		} else {
-			fmt.Printf("Please login first.")
+			fmt.Printf("Please login first.\n")
 		}
 	},
 }

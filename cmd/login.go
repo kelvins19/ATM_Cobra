@@ -20,26 +20,26 @@ var loginCmd = &cobra.Command{
 		checkCurrentUser := viper.Get("username")
 
 		if len(args) < 1 {
-			fmt.Print("You should have at least one username")
+			fmt.Print("You should have at least one username\n")
 		}
 
 		if len(args) > 1 {
-			fmt.Print("You can only have one username")
+			fmt.Print("You can only have one username\n")
 		}
 
 		if len(args) == 1 {
 			if checkCurrentUser != "" {
 				if args[0] == fmt.Sprintf("%v", checkCurrentUser) {
-					fmt.Printf("You have already logged in as %v. Please continue your activity", checkCurrentUser)
+					fmt.Printf("You have already logged in as %v. Please continue your activity\n", checkCurrentUser)
 				} else {
-					fmt.Printf("You have already been logged in as %v. Please logout first.", checkCurrentUser)
+					fmt.Printf("You have already been logged in as %v. Please logout first.\n", checkCurrentUser)
 				}
 			} else {
 				user, _ := database.FindOrCreateUser(args[0])
 				viper.Set("username", user.Username)
 				viper.WriteConfig()
 				fmt.Printf("Hello %v \n", user.Username)
-				fmt.Printf("Your balance is %v", user.Balance)
+				fmt.Printf("Your balance is $%v\n", user.Balance)
 			}
 		}
 	},

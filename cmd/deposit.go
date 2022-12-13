@@ -29,12 +29,12 @@ var depositCmd = &cobra.Command{
 				userData.Balance += depositBalance
 
 				database.UpdateUser(userData)
-				fmt.Printf("Your balance is %v ", userData.Balance)
+				fmt.Printf("Your balance is $%v \n", userData.Balance)
 			} else {
-				fmt.Printf("Please deposit more than 0")
+				fmt.Printf("Please deposit more than 0\n")
 			}
 		} else {
-			fmt.Printf("Please login first.")
+			fmt.Printf("Please login first.\n")
 		}
 	},
 }

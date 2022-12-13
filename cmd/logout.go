@@ -20,9 +20,9 @@ var logoutCmd = &cobra.Command{
 			user := viper.Get("username")
 
 			if user == "" {
-				fmt.Print("There is no user logged in. Please login first")
+				fmt.Print("There is no user logged in. Please login first\n")
 			} else {
-				fmt.Printf("Goodbye %v", user)
+				fmt.Printf("Goodbye %v\n", user)
 
 				viper.Set("username", "")
 				viper.WriteConfig()
